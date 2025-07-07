@@ -3,12 +3,22 @@
  */
 package javaopenglgameengine;
 
+import org.lwjgl.Version;
+
+import javaopenglgameengine.core.WindowManager;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        System.out.println(Version.getVersion());
+
+        WindowManager window = new WindowManager("test", 1280, 720, false);
+        window.init();
+
+        while(!window.windowShouldClose()) {
+            window.update();
+        }
+
+        window.cleanup();
     }
 }

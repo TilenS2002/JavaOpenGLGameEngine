@@ -1,5 +1,6 @@
 package javaopenglgameengine.test;
 
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
@@ -8,6 +9,7 @@ import javaopenglgameengine.core.ObjectLoader;
 import javaopenglgameengine.core.RenderManager;
 import javaopenglgameengine.core.WindowManager;
 import javaopenglgameengine.core.iLogic;
+import javaopenglgameengine.core.entety.Entity;
 import javaopenglgameengine.core.entety.Model;
 import javaopenglgameengine.core.entety.Texture;
 
@@ -20,7 +22,7 @@ public class TestLogic implements iLogic{
     private final ObjectLoader loader;
     private final WindowManager window;
 
-    private Model model;
+    private Entity entity;
 
     public TestLogic() {
         renderer = new RenderManager();
@@ -51,8 +53,9 @@ public class TestLogic implements iLogic{
             1,0
         };
 
-        model = loader.loadModel(vertices, textureCoords, indices);
+        Model model = loader.loadModel(vertices, textureCoords, indices);
         model.setTexture(new Texture(loader.loadTexture("textures/images.jpg")));
+        entity = new Entity(model, new Vector3f(1, 0, 0), new Vector3f(0, 0, 0), 1);
     }
 
     @Override
@@ -72,6 +75,10 @@ public class TestLogic implements iLogic{
             color = 1.0f;
         else if (color <= 0)
             color = 0.0f;
+        
+        if (entity.getPos().x < -1.5f)
+            entity.getPos().x = 1.5f;
+        entity.getPos().x -= 0.01f;
     }
 
     @Override
@@ -82,7 +89,7 @@ public class TestLogic implements iLogic{
         }
 
         window.setClearColor(color, color, color, 0.0f);
-        renderer.render(model);
+        renderer.render(entity);
     }
 
     @Override

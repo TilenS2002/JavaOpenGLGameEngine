@@ -1,11 +1,13 @@
 package javaopenglgameengine.test;
 
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
 import javaopenglgameengine.App;
 import javaopenglgameengine.core.Camera;
+import javaopenglgameengine.core.MouseInput;
 import javaopenglgameengine.core.ObjectLoader;
 import javaopenglgameengine.core.RenderManager;
 import javaopenglgameengine.core.WindowManager;
@@ -13,6 +15,7 @@ import javaopenglgameengine.core.iLogic;
 import javaopenglgameengine.core.entety.Entity;
 import javaopenglgameengine.core.entety.Model;
 import javaopenglgameengine.core.entety.Texture;
+import javaopenglgameengine.core.utils.Consts;
 
 public class TestLogic implements iLogic{
 
@@ -115,8 +118,14 @@ public class TestLogic implements iLogic{
     }
 
     @Override
-    public void update() {
-        camera.movePosition(cameraInc.x * CAMERA_MOVE_SPEED, cameraInc.y * CAMERA_MOVE_SPEED, cameraInc.z * CAMERA_MOVE_SPEED);
+    public void update(float interval, MouseInput mouseInput) {
+        camera.movePosition(cameraInc.x * Consts.CAMERA_STEP, cameraInc.y * Consts.CAMERA_STEP, cameraInc.z * CAMERA_MOVE_SPEED);
+
+        if (mouseInput.isRightButtonPress())
+        {
+            Vector2f rotVec = mouseInput.getDisplVec();
+            camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
+        }
 
         entity.incRotation(0.0f, 0.5f, 0.0f);
     }

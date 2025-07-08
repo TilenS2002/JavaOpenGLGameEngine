@@ -18,6 +18,7 @@ public class EngineManager {
     private boolean isRunning;
 
     private WindowManager window;
+    private MouseInput mouseInput;
     private GLFWErrorCallback errorCallback;
     private iLogic gameLogic;
 
@@ -25,7 +26,9 @@ public class EngineManager {
         GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
         window = App.getWindow();
         gameLogic = App.getGame();
+        mouseInput = new MouseInput();
         window.init();
+        mouseInput.init();
         gameLogic.init();
     }
 
@@ -75,7 +78,7 @@ public class EngineManager {
             }
 
             if (render) {
-                update();
+                update(frametime);
                 render();
                 frames++;
             }
@@ -93,6 +96,7 @@ public class EngineManager {
     }
 
     private void input() {
+        mouseInput.input();
         gameLogic.input();
     }
 
@@ -101,8 +105,8 @@ public class EngineManager {
         window.update();
     }
 
-    private void update() {
-        gameLogic.update();
+    private void update(float interval) {
+        gameLogic.update(interval, mouseInput);
     }
 
     private void cleanup() {

@@ -4,9 +4,11 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
 import javaopenglgameengine.App;
+import javaopenglgameengine.core.ObjectLoader;
 import javaopenglgameengine.core.RenderManager;
 import javaopenglgameengine.core.WindowManager;
 import javaopenglgameengine.core.iLogic;
+import javaopenglgameengine.core.entety.Model;
 
 public class TestLogic implements iLogic{
 
@@ -14,16 +16,36 @@ public class TestLogic implements iLogic{
     private float color = 0.0f;
 
     private final RenderManager renderer;
+    private final ObjectLoader loader;
     private final WindowManager window;
+
+    private Model model;
 
     public TestLogic() {
         renderer = new RenderManager();
         window = App.getWindow();
+        loader = new ObjectLoader();
     }
 
     @Override
     public void init() throws Exception {
         renderer.init();
+
+        float[] vertices = {
+            -0.5f, 0.5f, 0f,
+            -0.5f, -0.5f, 0f,
+            0.5f, -0.5f, 0f,
+            0.5f, -0.5f, 0f,
+            0.5f, 0.5f, 0f,
+            -0.5f, 0.5f, 0f
+        };
+
+        int[] indices = {
+            0,1,3,
+            3,1,2
+        };
+
+        model = loader.loadModel(vertices, indices);
     }
 
     @Override
@@ -53,12 +75,13 @@ public class TestLogic implements iLogic{
         }
 
         window.setClearColor(color, color, color, 0.0f);
-        renderer.clear();
+        renderer.render(model);
     }
 
     @Override
     public void cleanup() {
         renderer.cleanup();
+        loader.cleanup();
     }
     
 }

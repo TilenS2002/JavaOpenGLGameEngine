@@ -5,7 +5,6 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 
 import javaopenglgameengine.App;
 import javaopenglgameengine.core.utils.Consts;
-import javaopenglgameengine.test.TestLogic;
 
 public class EngineManager {
 

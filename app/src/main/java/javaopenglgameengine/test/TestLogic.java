@@ -9,6 +9,7 @@ import javaopenglgameengine.core.RenderManager;
 import javaopenglgameengine.core.WindowManager;
 import javaopenglgameengine.core.iLogic;
 import javaopenglgameengine.core.entety.Model;
+import javaopenglgameengine.core.entety.Texture;
 
 public class TestLogic implements iLogic{
 
@@ -32,12 +33,10 @@ public class TestLogic implements iLogic{
         renderer.init();
 
         float[] vertices = {
-            -0.5f, 0.5f, 0f,
+            -0.5f,  0.5f, 0f,
             -0.5f, -0.5f, 0f,
             0.5f, -0.5f, 0f,
-            0.5f, -0.5f, 0f,
-            0.5f, 0.5f, 0f,
-            -0.5f, 0.5f, 0f
+            0.5f,  0.5f, 0f,
         };
 
         int[] indices = {
@@ -45,7 +44,15 @@ public class TestLogic implements iLogic{
             3,1,2
         };
 
-        model = loader.loadModel(vertices, indices);
+        float[] textureCoords = {
+            0,0,
+            0,1,
+            1,1,
+            1,0
+        };
+
+        model = loader.loadModel(vertices, textureCoords, indices);
+        model.setTexture(new Texture(loader.loadTexture("textures/images.jpg")));
     }
 
     @Override

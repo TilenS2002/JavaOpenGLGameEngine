@@ -43,7 +43,7 @@ public class TestLogic implements iLogic{
         renderer.init();
 
         Model model = loader.loadOBJModel("/models/bunny.obj");
-        model.setTexture(new Texture(loader.loadTexture("textures/images.jpg")));
+        model.setTexture(new Texture(loader.loadTexture("textures/images.jpg")), 1f);
         entity = new Entity(model, new Vector3f(0, 0, -5), new Vector3f(0, 0, 0), 1);
     }
 
@@ -58,7 +58,7 @@ public class TestLogic implements iLogic{
             cameraInc.x = -1;
         if (window.isKeyPressed(GLFW.GLFW_KEY_D))
             cameraInc.x = 1;
-        if (window.isKeyPressed(GLFW.GLFW_KEY_Y))
+        if (window.isKeyPressed(GLFW.GLFW_KEY_Z))
             cameraInc.y = -1;
         if (window.isKeyPressed(GLFW.GLFW_KEY_X))
             cameraInc.y = 1;
@@ -74,7 +74,7 @@ public class TestLogic implements iLogic{
             camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
         }
 
-        entity.incRotation(0.0f, 0.5f, 0.0f);
+        entity.incRotation(0.0f, 0.25f, 0.0f);
     }
 
     @Override
@@ -84,7 +84,6 @@ public class TestLogic implements iLogic{
             window.setResize(true);
         }
 
-        window.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         renderer.render(entity, camera);
     }
 

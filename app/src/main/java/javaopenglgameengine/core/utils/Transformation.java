@@ -5,12 +5,19 @@ import org.joml.Vector3f;
 
 import javaopenglgameengine.core.Camera;
 import javaopenglgameengine.core.entety.Entity;
+import javaopenglgameengine.core.entety.terrain.Terrain;
 
 public class Transformation {
 
     public static Matrix4f createTransformationMatrix(Entity entity) {
         Matrix4f matrix = new Matrix4f();
         matrix.identity().translate(entity.getPos()).rotateX((float) Math.toRadians(entity.getRotation().x)).rotateY((float) Math.toRadians(entity.getRotation().y)).rotateZ((float) Math.toRadians(entity.getRotation().z)).scale(entity.getScale());
+        return matrix;
+    }
+
+    public static Matrix4f createTransformationMatrix(Terrain terrain) {
+        Matrix4f matrix = new Matrix4f();
+        matrix.identity().translate(terrain.getPosition()).scale(1);
         return matrix;
     }
 

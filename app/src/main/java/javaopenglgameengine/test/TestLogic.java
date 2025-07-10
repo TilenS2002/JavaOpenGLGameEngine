@@ -15,8 +15,10 @@ import javaopenglgameengine.core.ObjectLoader;
 import javaopenglgameengine.core.WindowManager;
 import javaopenglgameengine.core.iLogic;
 import javaopenglgameengine.core.entety.Entity;
+import javaopenglgameengine.core.entety.Material;
 import javaopenglgameengine.core.entety.Model;
 import javaopenglgameengine.core.entety.Texture;
+import javaopenglgameengine.core.entety.terrain.Terrain;
 import javaopenglgameengine.core.lighting.DirectionalLight;
 import javaopenglgameengine.core.lighting.PointLight;
 import javaopenglgameengine.core.lighting.SpotLight;
@@ -32,6 +34,7 @@ public class TestLogic implements iLogic{
     private final WindowManager window;
 
     private List<Entity> entities;
+    private List<Terrain> terrains;
     private Camera camera;
 
     private float lightAngle;
@@ -56,6 +59,13 @@ public class TestLogic implements iLogic{
 
         Model model = loader.loadOBJModel("/models/bunny.obj");
         model.setTexture(new Texture(loader.loadTexture("textures/images.jpg")), 1f);
+
+        terrains = new ArrayList<>();
+        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/images.jpg")), 0.1f));
+        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/images.jpg")), 0.1f));
+        terrains.add(terrain);
+        terrains.add(terrain2);
+
 
         entities = new ArrayList<>();
         Random rand = new Random();
@@ -146,6 +156,10 @@ public class TestLogic implements iLogic{
 
         for (Entity entity : entities) {
             renderer.processEntity(entity);
+        }
+
+        for(Terrain terrain : terrains) {
+            renderer.processTerrain(terrain);
         }
     }
 

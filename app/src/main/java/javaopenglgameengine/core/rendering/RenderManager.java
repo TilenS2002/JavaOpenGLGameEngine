@@ -10,7 +10,7 @@ import javaopenglgameengine.core.Camera;
 import javaopenglgameengine.core.ShaderManager;
 import javaopenglgameengine.core.WindowManager;
 import javaopenglgameengine.core.entety.Entity;
-import javaopenglgameengine.core.entety.Model;
+import javaopenglgameengine.core.entety.SceneManager;
 import javaopenglgameengine.core.entety.terrain.Terrain;
 import javaopenglgameengine.core.lighting.DirectionalLight;
 import javaopenglgameengine.core.lighting.PointLight;
@@ -51,7 +51,7 @@ public class RenderManager {
         shader.setUniform("directionalLight", directionalLight);
     }
 
-    public void render(Camera camera, DirectionalLight directionalLight, PointLight[] pointLights, SpotLight[] spotLights) {
+    public void render(Camera camera, SceneManager scene) {
         clear();
 
         if (window.isResize()) {
@@ -59,8 +59,8 @@ public class RenderManager {
             window.setResize(true);
         }
 
-        entityRenderer.render(camera, pointLights, spotLights, directionalLight);
-        terrainRenderer.render(camera, pointLights, spotLights, directionalLight);
+        entityRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight());
+        terrainRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight());
     }
 
     public void processEntity(Entity entity) {

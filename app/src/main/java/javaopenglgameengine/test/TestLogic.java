@@ -82,10 +82,11 @@ public class TestLogic implements iLogic {
         Vector3f lightPosition = new Vector3f(0, 5, -3.2f);
         Vector3f lightColor = new Vector3f(1, 1, 1);
         PointLight pointLight = new PointLight(lightColor, lightPosition, lightIntensity);
-
+        PointLight.Attenuation attenuation = new PointLight.Attenuation(0, 0, 1);
+        pointLight.setAttenuation(attenuation);
         Vector3f coneDir = new Vector3f(0, 0, 1);
         float cutoff = (float) Math.cos(Math.toRadians(180));
-        SpotLight spotLight = new SpotLight(new PointLight(lightColor, new Vector3f(0, 0, 1f), lightIntensity, 0, 0, 1), coneDir, cutoff);
+        SpotLight spotLight = new SpotLight(new PointLight(lightColor, new Vector3f(0, 0, 1f), lightIntensity), coneDir, cutoff);
         
         SpotLight spotLight2 = new SpotLight(pointLight, coneDir, cutoff);
 
@@ -147,10 +148,10 @@ public class TestLogic implements iLogic {
             sceneManager.setSpotInc(1);
         
         double spotAngleRed = Math.toRadians(sceneManager.getSpotAngle());
-        Vector3f coneDir = sceneManager.getSpotLights()[0].getPointLight().getPosition();
+        Vector3f coneDir = sceneManager.getSpotLights()[0].getConeDirection();
         coneDir.x = (float) Math.sin(spotAngleRed);
 
-        coneDir = sceneManager.getSpotLights()[1].getPointLight().getPosition();
+        coneDir = sceneManager.getSpotLights()[1].getConeDirection();
         coneDir.z = (float) Math.cos(spotAngleRed * 0.15f);
 
         sceneManager.incLightAngle(0.5f);

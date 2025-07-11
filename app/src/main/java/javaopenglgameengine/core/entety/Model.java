@@ -1,6 +1,7 @@
 package javaopenglgameengine.core.entety;
 
 public class Model {
+    
     private int id;
     private int vertexCount;
     private Material material;

@@ -3,6 +3,7 @@ package javaopenglgameengine.core.lighting;
 import org.joml.Vector3f;
 
 public class DirectionalLight {
+    
     private Vector3f color, direction;
     private float intensity;
 
@@ -35,4 +36,5 @@ public class DirectionalLight {
     public void setIntensity(float intensity) {
         this.intensity = intensity;
     }
+    
 }

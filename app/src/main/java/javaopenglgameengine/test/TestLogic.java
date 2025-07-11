@@ -64,8 +64,6 @@ public class TestLogic implements iLogic {
 
         BlendMapTerrain blendMapTerrain = new BlendMapTerrain(backgroundTexture, redTexture, greenTexture, blueTexture);
 
-
-
         Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Vector4f(0.0f, 0.0f, 0.0f, 0.0f), 0.1f), blendMapTerrain, blendMap);
         Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Vector4f(0.0f, 0.0f, 0.0f, 0.0f), 1.0f), blendMapTerrain, blendMap);
         sceneManager.addTerrain(terrain);
@@ -80,8 +78,8 @@ public class TestLogic implements iLogic {
         }
         sceneManager.addEntity(new Entity(model, new Vector3f(0,0,-2f), new Vector3f(0,0,0), 50));
     
-        float lightIntensity = 100000.0f;
-        Vector3f lightPosition = new Vector3f(1, 1, -3.2f);
+        float lightIntensity = 0.0f;
+        Vector3f lightPosition = new Vector3f(-1, -10, 0);
         Vector3f lightColor = new Vector3f(1, 1, 1);
         PointLight pointLight = new PointLight(lightColor, lightPosition, lightIntensity);
 
@@ -150,13 +148,13 @@ public class TestLogic implements iLogic {
         coneDir = sceneManager.getSpotLights()[1].getPointLight().getPosition();
         coneDir.z = (float) Math.cos(spotAngleRed * 0.15f);
 
-        sceneManager.incLightAngle(1.1f);
+        sceneManager.incLightAngle(0.5f);
         if (sceneManager.getLightAngle() > 90) {
             sceneManager.getDirectionalLight().setIntensity(0);
             if (sceneManager.getLightAngle() >= 360)
                 sceneManager.setLightAngle(-90);
         } else if (sceneManager.getLightAngle() <= -80 || sceneManager.getLightAngle() >= 80) {
-            float factor = 1 - (Math.abs(sceneManager.getLightAngle()) - 80) / 10.0f;
+            float factor = 1 - (float) (Math.abs(sceneManager.getLightAngle()) - 80) / 10.0f;
             sceneManager.getDirectionalLight().setIntensity(factor);
             sceneManager.getDirectionalLight().getColor().y = Math.max(factor, 0.9f);
             sceneManager.getDirectionalLight().getColor().z = Math.max(factor, 0.5f);

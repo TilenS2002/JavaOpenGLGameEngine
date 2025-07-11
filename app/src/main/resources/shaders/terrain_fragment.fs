@@ -88,7 +88,7 @@ vec4 calcLightColor(vec3 light_color, float light_intensity, vec3 position, vec3
     specularFactor = pow(specularFactor, specularPower);
     specColor = specularC * light_intensity * specularFactor * material.reflectance * vec4(light_color, 1.0);
 
-    return (diffuseColor * specColor);
+    return (diffuseColor + specColor);
 }
 
 vec4 calcPointLight(PointLight light, vec3 position, vec3 normal) {

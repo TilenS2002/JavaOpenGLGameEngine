@@ -54,6 +54,7 @@ public class TestLogic implements iLogic {
 
         Model model = loader.loadOBJModel("/models/bunny.obj");
         model.setTexture(new Texture(loader.loadTexture("textures/Tileable classic water texture.jpg")), 1f);
+        // model.getMaterial().setDisableCulling(true);
 
         TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("textures/stone.png"));
         TerrainTexture redTexture = new TerrainTexture(loader.loadTexture("textures/dirt.png"));

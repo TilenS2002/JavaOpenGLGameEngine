@@ -61,6 +61,12 @@ public class ShaderManager {
         createUniform(uniformName + ".exponent");
     }
 
+    public void createSpotLightUniform(String uniformName) throws Exception {
+        createPointLightUniform(uniformName + ".pl");
+        createUniform(uniformName + ".conedir");
+        createUniform(uniformName + ".cutoff");
+    }
+
     public void createPointLightListUniform(String uniformName, int size) throws Exception {
         for (int i = 0; i < size; i++) {
             createPointLightUniform(uniformName + "[" + i + "]");
@@ -71,12 +77,6 @@ public class ShaderManager {
         for (int i = 0; i < size; i++) {
             createSpotLightUniform(uniformName + "[" + i + "]");
         }
-    }
-
-    public void createSpotLightUniform(String uniformName) throws Exception {
-        createPointLightUniform(uniformName + ".pl");
-        createUniform(uniformName + ".conedir");
-        createUniform(uniformName + ".cutoff");
     }
 
     public void setUniform(String uniformName, Matrix4f value) {

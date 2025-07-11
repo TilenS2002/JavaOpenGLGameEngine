@@ -78,8 +78,8 @@ public class TestLogic implements iLogic {
         }
         sceneManager.addEntity(new Entity(model, new Vector3f(0,0,-2f), new Vector3f(0,0,0), 50));
     
-        float lightIntensity = 0.0f;
-        Vector3f lightPosition = new Vector3f(-1, -10, 0);
+        float lightIntensity = 1.0f;
+        Vector3f lightPosition = new Vector3f(0, 5, -3.2f);
         Vector3f lightColor = new Vector3f(1, 1, 1);
         PointLight pointLight = new PointLight(lightColor, lightPosition, lightIntensity);
 
@@ -89,7 +89,7 @@ public class TestLogic implements iLogic {
         
         SpotLight spotLight2 = new SpotLight(pointLight, coneDir, cutoff);
 
-        lightPosition = new Vector3f(0, 0, -3);
+        lightPosition = new Vector3f(-1, -10, 0);
         lightColor = new Vector3f(1, 1, 1);
         sceneManager.setDirectionalLight(new DirectionalLight(lightColor, lightPosition, lightIntensity));
 
@@ -117,9 +117,14 @@ public class TestLogic implements iLogic {
         float lightPos = sceneManager.getSpotLights()[0].getPointLight().getPosition().z;
 
         if (window.isKeyPressed(GLFW.GLFW_KEY_O))
-            sceneManager.getSpotLights()[0].getPointLight().getColor().z = lightPos + 0.1f;
+            sceneManager.getSpotLights()[0].getPointLight().getPosition().z = lightPos + 0.1f;
         if (window.isKeyPressed(GLFW.GLFW_KEY_P))
-            sceneManager.getSpotLights()[0].getPointLight().getColor().z = lightPos - 0.1f;
+            sceneManager.getSpotLights()[0].getPointLight().getPosition().z = lightPos - 0.1f;
+        
+        if (window.isKeyPressed(GLFW.GLFW_KEY_N))
+            sceneManager.getPointLights()[0].getPosition().z = lightPos + 0.1f;
+        if (window.isKeyPressed(GLFW.GLFW_KEY_M))
+            sceneManager.getPointLights()[0].getPosition().z = lightPos - 0.1f;
     }
 
     @Override

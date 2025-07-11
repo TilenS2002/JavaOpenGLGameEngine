@@ -3,6 +3,7 @@ package javaopenglgameengine.core.lighting;
 import org.joml.Vector3f;
 
 public class PointLight {
+
     private Vector3f color, position;
     private float intensity, constant, linear, exponent;
 
@@ -55,4 +56,5 @@ public class PointLight {
     public void setExponent(float exponent) {
         this.exponent = exponent;
     }
+    
 }
